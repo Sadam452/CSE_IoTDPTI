@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText MosqueId;
-    Button btnSubmit;
+    Button btnSubmit,btnSetLoc;
     TextView tvSearchId;
     ImageView ivHelp;
     final int GET_ID=1;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MosqueId = findViewById(R.id.MosqueId);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnSetLoc = findViewById(R.id.btnSetLoc);
         tvSearchId = findViewById(R.id.tvSearchId);
         ivHelp = findViewById(R.id.ivHelp);
 
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,
                         MainActivity2.class);
                 startActivityForResult(intent,GET_ID);
+            }
+        });
+
+        btnSetLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,
+                        MainActivity3.class);
+                startActivity(intent);
             }
         });
 
