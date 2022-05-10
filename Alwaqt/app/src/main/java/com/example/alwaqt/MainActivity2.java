@@ -5,27 +5,48 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
-    EditText edID;
     Button btnFind;
     ImageButton ibHelp;
-
+   // Spinner edID = (Spinner) findViewById(R.id.spinner2);
+  // @Override
+   /*public boolean onCreateOptionsMenu(Menu menu) {
+      /* Spinner edID = (Spinner) findViewById(R.id.spinner2);
+       ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+               R.array.Mosque_Names, android.R.layout.simple_spinner_item);
+       adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       edID.setAdapter(adapter);
+       return super.onCreateOptionsMenu(menu);
+   }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        edID = findViewById(R.id.edID);
         btnFind = findViewById(R.id.btnFind);
         ibHelp = findViewById(R.id.ibHelp);
-        edID.setOnClickListener(new View.OnClickListener() {
+        String[] Mosque_Names = {"--SELECT YOUR MOSQUE#-", "Jamia Masjid Srinagar #6000", "Jamia Masjid Awantipora #6001","Hanafi Masjid Srinagar #6002"};
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Mosque_Names);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner2);
+        // add adapter to spinner
+        spinner.setAdapter(stringArrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // put code which recognize a selected element
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -33,12 +54,16 @@ public class MainActivity2 extends AppCompatActivity {
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edID.getText().toString().isEmpty()){
+                String arr[];
+                arr = new String[2];
+                arr = spinner.getSelectedItem().toString().split("#");
+                if(spinner.getSelectedItem().toString().isEmpty() || arr[1].trim().length()<=2){
                     Toast.makeText(MainActivity2.this,"Please fill all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Intent intent = new Intent();
-                    intent.putExtra("edID_",edID.getText().toString().trim());
+                    //if(arr[1].trim() !=" "){
+                    intent.putExtra("edID_",arr[1].trim());
 
                     setResult(RESULT_OK,intent);
                     MainActivity2.this.finish();
@@ -61,4 +86,5 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
+
 }

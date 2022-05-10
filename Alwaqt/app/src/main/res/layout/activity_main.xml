@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="80dp"
             android:hint="SET LOCATION"
             android:textColorHint="@color/white"
             android:textSize="16dp"
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="80dp"
             android:clickable="true"
             app:srcCompat="@android:drawable/ic_menu_help" />
     </LinearLayout>

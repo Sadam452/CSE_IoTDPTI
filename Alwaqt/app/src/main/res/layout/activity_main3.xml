@@ -82,6 +82,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="310dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@android:drawable/ic_menu_help" />
 </LinearLayout>
