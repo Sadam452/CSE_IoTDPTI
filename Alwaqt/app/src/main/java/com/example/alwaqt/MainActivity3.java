@@ -55,7 +55,7 @@ public class MainActivity3 extends AppCompatActivity {
         password = findViewById(R.id.password);
         btnSendCoor = findViewById(R.id.btnSendCoor);
         ibHelp1 = findViewById(R.id.ibHelp1);
-
+        et1.setEnabled(false); //so that location can be entered automatically-- user can not change this field
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
