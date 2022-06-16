@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "288137095277",
+    "firebase_url": "https://alwaqt-413bd-default-rtdb.firebaseio.com",
+    "project_id": "alwaqt-413bd",
+    "storage_bucket": "alwaqt-413bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288137095277:android:fec4fb67fcf73c0a87b764",
+        "android_client_info": {
+          "package_name": "com.example.alwaqt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288137095277-redbqsfog9gpaceins6slindjvl2cjlq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVWSYUdrf8QSg_junaSGNMilkEMdLTYvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288137095277-redbqsfog9gpaceins6slindjvl2cjlq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
