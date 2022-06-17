@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText MosqueId;
     Button btnSubmit,btnSetLoc;
     TextView tvSearchId;
+    TextView tvTime;
     ImageView ivHelp;
     final int GET_ID=1;
     String val;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         btnSetLoc = findViewById(R.id.btnSetLoc);
         tvSearchId = findViewById(R.id.tvSearchId);
+        tvTime = findViewById(R.id.tvTime);
         ivHelp = findViewById(R.id.ivHelp);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 if(MosqueId.getText().toString().isEmpty()){
                     Toast.makeText(MainActivity.this,"Please fill all the required fields to proceed", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        tvTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,
+                        MainActivity4.class);
+                startActivityForResult(intent,GET_ID);
             }
         });
 
