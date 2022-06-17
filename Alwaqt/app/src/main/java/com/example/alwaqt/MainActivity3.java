@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
@@ -32,15 +33,26 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity3 extends AppCompatActivity {
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://alwaqt-413bd-default-rtdb.firebaseio.com/");
     EditText et1;
     EditText mosqueId1;
     EditText adminID;
     EditText password;
     Button btnSendCoor;
     ImageButton ibHelp1;
+    int flag=0;
     private LocationRequest locationRequest;
     private static final int REQUEST_CHECK_SETTINGS = 10001;
 
@@ -80,12 +92,49 @@ public class MainActivity3 extends AppCompatActivity {
         btnSendCoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String mosque_id = mosqueId1.getText().toString();
+                final String coordinates = et1.getText().toString();
+                final String admin_id = adminID.getText().toString();
+                final String pass = password.getText().toString();
+                if (et1.getText().toString().isEmpty()) {
+                    getLocation_();
+                }
                 if (et1.getText().toString().isEmpty() || mosqueId1.getText().toString().isEmpty() || adminID.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity3.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 }
-                if(et1.getText().toString().isEmpty()){
-                    getLocation_();
-                }
+                else{
+                    databaseReference.child("mosque").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //check if mosque with given id exists
+                            if (snapshot.hasChild(mosque_id)){
+                                //get admin id and password
+                                final String getPassword = snapshot.child(mosque_id).child("password").getValue(String.class);
+                                final String getAdminId = snapshot.child(mosque_id).child("adminID").getValue(String.class);
+
+                                if (getPassword.equals(pass) && getAdminId.equals(admin_id)){
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("location", coordinates);
+                                    databaseReference.child("mosque").child(mosque_id).updateChildren(map);
+                                    Toast.makeText(MainActivity3.this, "Location has been successfully updated!", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(MainActivity3.this, "Admin ID or Password is incorrect!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else{
+                                Toast.makeText(MainActivity3.this, "Mosque ID doesn't exist!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+            }
+
+
             }
         });
 
@@ -181,4 +230,5 @@ public class MainActivity3 extends AppCompatActivity {
         isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         return isEnabled;
     }
+
 }

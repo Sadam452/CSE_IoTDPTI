@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/getID"
-            android:layout_width="432dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="50dp"

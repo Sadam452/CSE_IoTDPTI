@@ -8,13 +8,18 @@
     tools:context=".MainActivity2">
 
     <ImageView
-        android:id="@+id/ivSearch"
-        android:layout_width="236dp"
-        android:layout_height="229dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:scrollbarSize="20dp"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv1"
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -30,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
         android:clickable="true"
         android:hint="FIND MOSQUE ID"
@@ -43,7 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="310dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_help" />
+
 </LinearLayout>

@@ -15,7 +15,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/pngtreeillustration_vector_graphics_of_move_6003476"
+            android:src="@drawable/allah_islam"
             android:layout_centerVertical="true"
             android:id="@+id/img1"
             app:civ_border_width="2dp"
@@ -67,18 +67,18 @@
             android:layout_below="@id/namaaz2"
             android:layout_marginLeft="10dp"
             />
+
         <TextView
+            android:id="@+id/namaaz4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/namaaz4"
-            android:text="Maghrib "
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:layout_toRightOf="@id/img1"
             android:layout_below="@id/namaaz3"
             android:layout_marginLeft="10dp"
-            />
+            android:layout_toRightOf="@id/img1"
+            android:text="Maghrib "
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -28,7 +28,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel,MainAdapter.m
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull MainModel model) {
-            holder.mosqueName.setText(model.getMosqueName());
+            holder.mosqueName.setText(model.getMosqueName()+" (#"+model.getMosqueID()+")");
             holder.namaaz1.setText("Fajr            \t"+model.getFajrNamaaz());
             holder.namaaz2.setText("Zuhar         \t"+model.getZuharAzaan());
             holder.namaaz3.setText("Asr             \t"+model.getAsrNamaaz());

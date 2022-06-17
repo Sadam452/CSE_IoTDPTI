@@ -1,5 +1,8 @@
 package com.example.alwaqt;
 
+import static android.os.Build.VERSION_CODES.M;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +16,11 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Path;
 
 public class MainActivity4 extends AppCompatActivity {
 
@@ -69,8 +76,22 @@ public class MainActivity4 extends AppCompatActivity {
                     mainAdapter = new MainAdapter(options);
                     recyclerView.setAdapter(mainAdapter);
                     mainAdapter.startListening();
+                    FirebaseDatabase.getInstance().getReference().child("mosque").orderByChild("mosqueID").equalTo(getID.getText().toString()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.getValue() == null){
+                                Toast.makeText(MainActivity4.this, "Oops! it looks that the Mosque ID doesn't exist! Please enter correct ID", Toast.LENGTH_SHORT).show();
+                            }
 
-                    //}
+                           // Toast.makeText(MainActivity4.this, "O"+snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(MainActivity4.this, "Some error occured! Try again after few moments", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });

@@ -2,11 +2,11 @@ package com.example.alwaqt;
 
 public class MainModel {
     String asrAzaan,asrNamaaz,fajrAzaan,fajrNamaaz,ishaAzaan,ishaNamaaz,
-            jummah,location,maghribAzaan,maghribNamaaz,mosqueName,sunrise,sunset,zuharAzaan,zuharNamaaz;
+            jummah,location,maghribAzaan,maghribNamaaz,mosqueName,sunrise,sunset,zuharAzaan,zuharNamaaz,mosqueID;
     MainModel(){
         //default constructor, do's nothing
     }
-    public MainModel(String asrAzaan, String asrNamaaz, String fajrAzaan, String fajrNamaaz, String ishaAzaan, String ishaNamaaz, String jummah, String location, String maghribAzaan, String maghribNamaaz, String mosqueName, String sunrise, String sunset, String zuharAzaan, String zuharNamaaz) {
+    public MainModel(String asrAzaan, String asrNamaaz, String fajrAzaan, String fajrNamaaz, String ishaAzaan, String ishaNamaaz, String jummah, String location, String maghribAzaan, String maghribNamaaz, String mosqueName, String sunrise, String sunset, String zuharAzaan, String zuharNamaaz,String mosqueID) {
         this.asrAzaan = asrAzaan;
         this.asrNamaaz = asrNamaaz;
         this.fajrAzaan = fajrAzaan;
@@ -22,6 +22,7 @@ public class MainModel {
         this.sunset = sunset;
         this.zuharAzaan = zuharAzaan;
         this.zuharNamaaz = zuharNamaaz;
+        this.mosqueID = mosqueID;
     }
 
     public String getAsrAzaan() {
@@ -142,5 +143,13 @@ public class MainModel {
 
     public void setZuharNamaaz(String zuharNamaaz) {
         this.zuharNamaaz = zuharNamaaz;
+    }
+
+    public String getMosqueID() {
+        return mosqueID;
+    }
+
+    public void setMosqueID(String mosqueID) {
+        this.mosqueID = mosqueID;
     }
 }
