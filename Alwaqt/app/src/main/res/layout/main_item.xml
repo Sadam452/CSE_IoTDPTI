@@ -91,6 +91,18 @@
             android:layout_below="@id/namaaz4"
             android:layout_marginLeft="10dp"
             />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="90dp"
+            android:id="@+id/btnMap"
+            android:text="Locate"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:background="@color/darkGreen"
+            android:layout_below="@+id/namaaz5"
+            android:layout_marginTop="10dp"
+            />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -8,14 +8,10 @@
     tools:context=".MainActivity3">
 
     <ImageView
-        android:id="@+id/iv3"
-        android:layout_width="327dp"
-        android:layout_height="241dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_set_as"
-        tools:layout_editor_absoluteX="41dp" />
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="245dp"
+        app:srcCompat="@drawable/edit_location" />
 
     <EditText
         android:id="@+id/et1"

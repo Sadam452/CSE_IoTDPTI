@@ -22,7 +22,8 @@
         android:layout_marginRight="30dp"
         android:clickable="true"
         android:gravity="center_horizontal"
-        android:text="Don't Want To Set The Mosque? View Mosque Timetable Directly" />
+        android:text="Don't Want To Set The Mosque? View Mosque Timetable Directly"
+        android:textColor="@color/blue" />
 
     <TextView
         android:id="@+id/tvMain"
