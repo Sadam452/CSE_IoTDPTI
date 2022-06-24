@@ -1,7 +1,5 @@
 package com.example.alwaqt;
 
-import static android.os.Build.VERSION_CODES.M;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -12,14 +10,19 @@ import android.Manifest;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -38,16 +41,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Path;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+// To keep the specific class and all its properties and members.
 
 public class MainActivity4 extends AppCompatActivity {
-
-    EditText getID;
+    LinearLayout layout;
+    EditText getID;TextView nm;
     Button search,btnLocate;
     RecyclerView recyclerView;
     MainAdapter mainAdapter;
@@ -67,6 +70,11 @@ public class MainActivity4 extends AppCompatActivity {
         search = findViewById(R.id.search);
         btnLocate = findViewById(R.id.btnLocate);
         btnLocate.setEnabled(false);
+        nm = findViewById(R.id.nearby);
+        nm.setMovementMethod(new ScrollingMovementMethod());
+        nm.setMovementMethod(LinkMovementMethod.getInstance());
+        layout = findViewById(R.id.layout1);
+        nm.setVisibility(View.GONE);
         //for location
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -88,6 +96,7 @@ public class MainActivity4 extends AppCompatActivity {
                     Toast.makeText(MainActivity4.this, "Please fill the Mosque ID field", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    nm.setVisibility(View.GONE);
                     FirebaseRecyclerOptions<MainModel> options =
                             new FirebaseRecyclerOptions.Builder<MainModel>()
                                     .setQuery(FirebaseDatabase.getInstance().getReference().child("mosque").orderByChild("mosqueID").equalTo(getID.getText().toString()),MainModel.class)
@@ -136,8 +145,8 @@ public class MainActivity4 extends AppCompatActivity {
                                 double tmp1 = Double.parseDouble(latLon[1]);
                                 double tmp2 = Double.parseDouble(latLon_[0]);
                                 double tmp3 = Double.parseDouble(latLon_[1]);
-                                if (tmp2 > tmp - 0.01 && tmp2 < tmp + 0.01 && tmp3 > tmp1 - 0.01 && tmp3 < tmp1 + 0.01) {
-                                    myList.add(post);
+                                if (tmp2 > tmp - 0.1 && tmp2 < tmp + 0.1 && tmp3 > tmp1 - 0.1 && tmp3 < tmp1 + 0.1) {
+                                    myList.add(i_);
                                 }
 //                                System.out.println(myList.size()+" 1 ="+myList.get(0));
 
@@ -156,7 +165,7 @@ public class MainActivity4 extends AppCompatActivity {
                 });
                 //show nearby mosques here
                 if(myList.size()>0){
-                System.out.println(myList.size()+" ok");
+                /*System.out.println(myList.size()+" ok");
                 String a= myList.get(0);
                 FirebaseRecyclerOptions<MainModel> options =
                         new FirebaseRecyclerOptions.Builder<MainModel>()
@@ -164,10 +173,83 @@ public class MainActivity4 extends AppCompatActivity {
                                         .startAt(myList.get(0)).endAt(myList.get(myList.size()-1)),MainModel.class).build();
                 mainAdapter = new MainAdapter(options);
                 mainAdapter.startListening();
-                recyclerView.setAdapter(mainAdapter);
+                recyclerView.setAdapter(mainAdapter);*/
+                    //new query
+                    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference usersRef = db.child("mosque");
+                    Query query = usersRef.orderByChild("location");
+
+                    List<Task<DataSnapshot>> tasks = new ArrayList<>();
+                    for (String locat : myList) {
+                        tasks.add(query.equalTo(locat).get());
+                    }
+                    //new
+
+                   // while(i<myList.size()) {
+                    nm.setVisibility(View.VISIBLE);
+                    nm.setText(myList.size()+" nearby Mosques found based on your current location!");
+                        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (i=0;i<myList.size();i++) {
+                                    String name_ = snapshot.child(myList.get(i)).child("mosqueName").getValue(String.class);
+                                    String fajr = snapshot.child(myList.get(i)).child("fajrNamaaz").getValue(String.class);
+                                    String zuhar = snapshot.child(myList.get(i)).child("zuharNamaaz").getValue(String.class);
+                                    String asr = snapshot.child(myList.get(i)).child("asrNamaaz").getValue(String.class);
+                                    String maghrib = snapshot.child(myList.get(i)).child("maghribNamaaz").getValue(String.class);
+                                    String isha = snapshot.child(myList.get(i)).child("ishaNamaaz").getValue(String.class);
+                                    String jummah = snapshot.child(myList.get(i)).child("jummah").getValue(String.class);
+                                    String l = snapshot.child(myList.get(i)).child("location").getValue(String.class);
+
+                                    nm.append("\n\n\nMosque Name :    "+name_);
+                                    nm.append("\nFajr Namaaz :       "+fajr);
+                                    nm.append("\nZuhar Namaaz :    "+zuhar);
+                                    nm.append("\nAsr Namaaz :        "+asr);
+                                    nm.append("\nMaghrib Namaaz :"+maghrib);
+                                    nm.append("\nIsha Namaaz :       "+isha);
+                                    String href = "maps.google.com/?q="+l;
+                                    nm.append("\nLocation      :     <a href=\""+href+"\">Locate</a>");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    //}
+                    /*Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+                        @Override
+                        public void onSuccess(List<Object> list) {
+                            //Do what you need to do with your list.
+                            for (Object object : list) {
+                                MainModel mm = ((DataSnapshot) object).getValue(MainModel.class);
+                                if(mm != null) {
+                                   // Log.d("TAG", mm.getLocation());
+                                    System.out.println("location ="+mm.getLocation());
+                                }
+                               /* ValueEventListener eventListener = new ValueEventListener() {
+
+
+                                        for(DataSnapshot ds : dataSnapshot.getChildren())
+                                            for(DataSnapshot dSnapshot : ds.getChildren()) {
+                                                MainModel streetClass = dSnapshot.getValue(MainModel.class);
+                                                System.out.println("location="+streetClass.getLocation());
+                                            }
+
+
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {}
+                                };
+                            }
+                        }
+                    }); */
                 }
                 else {
-                    Toast.makeText(MainActivity4.this, "Please try finding the nearby mosques again, if you still got the same message then no nearby mosque uses our services. Thank you :)", Toast.LENGTH_SHORT).show();
+                    nm.setText(myList.size()+"nearby Mosques found based on your current location!\n Please click on 'Locate Nearby Mosques' button again!");
+                    //Toast.makeText(MainActivity4.this, "Please try finding the nearby mosques again, if you still got the same message then no nearby mosque uses our services. Thank you :)", Toast.LENGTH_SHORT).show();
                 }
                 myList.clear();
 
