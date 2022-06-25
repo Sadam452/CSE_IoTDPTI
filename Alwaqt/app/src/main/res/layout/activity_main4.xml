@@ -63,7 +63,7 @@
         android:layout_marginRight="30dp"
         android:scrollbars="vertical"
         android:text="Nearby Mosques"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
 

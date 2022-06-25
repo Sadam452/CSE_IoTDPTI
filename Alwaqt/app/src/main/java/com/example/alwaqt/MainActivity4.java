@@ -208,7 +208,10 @@ public class MainActivity4 extends AppCompatActivity {
                                     nm.append("\nMaghrib Namaaz :"+maghrib);
                                     nm.append("\nIsha Namaaz :       "+isha);
                                     String href = "maps.google.com/?q="+l;
-                                    nm.append("\nLocation      :     <a href=\""+href+"\">Locate</a>");
+                                    //nm.append("\nLocation      :     <a href=\""+href+"\">Locate</a>");
+                                    nm.append("\n");
+                                    nm.append(Html.fromHtml("<a href=\"http://maps.google.com/maps?q="+l+"\"> Locate Mosque on Map </a>"));
+                                    nm.setMovementMethod(LinkMovementMethod.getInstance());
                                 }
                             }
 
