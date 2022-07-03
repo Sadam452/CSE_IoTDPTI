@@ -4,11 +4,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivHelp;
     final int GET_ID=1;
     String val;
+    public static MainActivity fa;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -35,22 +39,43 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private static int SPLASH_TIME_OUT=10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fa = this;
         MosqueId = findViewById(R.id.MosqueId);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnSetLoc = findViewById(R.id.btnSetLoc);
         tvSearchId = findViewById(R.id.tvSearchId);
         tvTime = findViewById(R.id.tvTime);
         ivHelp = findViewById(R.id.ivHelp);
-
+        //direct user on home page if mosque is set already
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences sharedPreferences = getSharedPreferences(MainActivity5.PREFS_NAME,0);
+                boolean hasSetMosque = sharedPreferences.getBoolean("hasSetMosque",false);
+                if(hasSetMosque){
+                    Intent intent = new Intent(MainActivity.this,MainActivity5.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        },SPLASH_TIME_OUT);
+        //
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(MosqueId.getText().toString().isEmpty()){
                     Toast.makeText(MainActivity.this,"Please fill all the required fields to proceed", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(MainActivity.this,
+                            MainActivity5.class);
+                    intent.putExtra("MosqueID_",MosqueId.getText().toString());
+                    startActivity(intent);
                 }
             }
         });

@@ -201,7 +201,8 @@ public class MainActivity4 extends AppCompatActivity {
                                     String jummah = snapshot.child(myList.get(i)).child("jummah").getValue(String.class);
                                     String l = snapshot.child(myList.get(i)).child("location").getValue(String.class);
 
-                                    nm.append("\n\n\nMosque Name :    "+name_);
+                                    nm.append("\n\n\n");
+                                    nm.append(Html.fromHtml("Mosque Name :    <span style=\"color:#47b895;\">"+name_+"</span>"));
                                     nm.append("\nFajr Namaaz :       "+fajr);
                                     nm.append("\nZuhar Namaaz :    "+zuhar);
                                     nm.append("\nAsr Namaaz :        "+asr);
@@ -210,7 +211,7 @@ public class MainActivity4 extends AppCompatActivity {
                                     String href = "maps.google.com/?q="+l;
                                     //nm.append("\nLocation      :     <a href=\""+href+"\">Locate</a>");
                                     nm.append("\n");
-                                    nm.append(Html.fromHtml("<a href=\"http://maps.google.com/maps?q="+l+"\"> Locate Mosque on Map </a>"));
+                                    nm.append(Html.fromHtml("<a style=\"display:inline;\"href=\"http://maps.google.com/maps?q="+l+"\"> Locate Mosque on Map </a>"));
                                     nm.setMovementMethod(LinkMovementMethod.getInstance());
                                 }
                             }
