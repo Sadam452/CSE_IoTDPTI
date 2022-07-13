@@ -92,9 +92,9 @@
 
         <TextView
             android:id="@+id/tvFajr"
-            android:layout_width="1dp"
+            android:layout_width="62dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:paddingTop="15dp"
             android:text="Fajr"
@@ -134,9 +134,9 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="0dp"
+            android:layout_width="62dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:paddingTop="15dp"
             android:text="Zuhar"
@@ -176,9 +176,9 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="3dp"
+            android:layout_width="62dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:paddingTop="15dp"
             android:text="Asr"
@@ -218,9 +218,9 @@
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="6dp"
+            android:layout_width="62dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:paddingTop="15dp"
             android:text="Maghrib"
@@ -260,9 +260,9 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="9dp"
+            android:layout_width="62dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:paddingTop="15dp"
             android:text="Isha"
@@ -307,11 +307,12 @@
             android:id="@+id/sunrise"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textColor="@color/brown2"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -322,18 +323,19 @@
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/sunset"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textColor="@color/brown2"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 

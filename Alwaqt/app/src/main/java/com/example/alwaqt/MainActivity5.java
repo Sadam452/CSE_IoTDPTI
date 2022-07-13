@@ -1,6 +1,7 @@
 package com.example.alwaqt;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +35,7 @@ public class MainActivity5 extends AppCompatActivity {
     private Button btnRow;
     TextView tvName,tvDate,tvFajrAzaan,tvFajrNamaz,zuharAzaan,zuharNamaz,asrAzaan,asrNamaz,maghribAzaan,maghribNamaz,ishaAzaan,ishaNamaz,sunrise,jummah,sunset;
     ImageView iv5,iv6;
+    ImageButton nearby2,search2,location2,help2,setting;
     //calculate hijri date
     UmmalquraCalendar cal = new UmmalquraCalendar();
     @Override
@@ -54,6 +57,13 @@ public class MainActivity5 extends AppCompatActivity {
         sunrise = findViewById(R.id.sunrise);
         sunset = findViewById(R.id.sunset);
         jummah = findViewById(R.id.jummah);
+        nearby2 = findViewById(R.id.nearby2);
+        search2 = findViewById(R.id.search2);
+        location2 = findViewById(R.id.location2);
+        help2 = findViewById(R.id.help2);
+        setting = findViewById(R.id.setting);
+        iv5 = findViewById(R.id.iv5);
+        iv6 = findViewById(R.id.iv6);
         //recieve MosqueID
         Intent intent = getIntent();
         String mosque_id = intent.getStringExtra("MosqueID_");
@@ -108,6 +118,68 @@ public class MainActivity5 extends AppCompatActivity {
         if(hasSetMosque1){
            setMosque(idFinal);
         }
+
+        //
+        nearby2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivity5.this,
+                        MainActivity4.class);
+                startActivity(intent2);
+            }
+        });
+        search2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivity5.this,
+                        MainActivity2.class);
+                startActivity(intent2);
+            }
+        });
+        location2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivity5.this,
+                        MainActivity3.class);
+                startActivity(intent2);
+            }
+        });
+        iv6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Context context = getApplicationContext();
+                CharSequence text = "Currently No announcement is made by your Mosque!!";
+               /* int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();*/
+                new AlertDialog.Builder(MainActivity5.this)
+                        .setTitle("Announcements")
+                        .setMessage(text)
+                        .setIcon(android.R.drawable.ic_menu_info_details)
+                        .show();
+            }
+        });
+        iv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Context context = getApplicationContext();
+                CharSequence text = "Unable to fetch Mosque Details!!\n Please reach this page after some time";
+               /* int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();*/
+                new AlertDialog.Builder(MainActivity5.this)
+                        .setTitle("Mosque Details")
+                        .setMessage(text)
+                        .setIcon(android.R.drawable.ic_menu_gallery)
+                        .show();
+            }
+        });
+
+
 
     }
     private String getMonthName(int arg){

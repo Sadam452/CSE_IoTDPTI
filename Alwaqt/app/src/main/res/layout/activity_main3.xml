@@ -11,7 +11,7 @@
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="245dp"
-        app:srcCompat="@drawable/edit_location" />
+        app:srcCompat="@drawable/ic_baseline_edit_location_24" />
 
     <EditText
         android:id="@+id/et1"
